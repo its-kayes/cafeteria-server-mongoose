@@ -1,5 +1,5 @@
 const express = require('express');
-const { MongoClient } = require('mongodb');
+// const { MongoClient } = require('mongodb');
 const mongoose = require('mongoose');
 const foods = require('./routes/foodsRoute');
 require('dotenv').config();
@@ -24,7 +24,10 @@ app.use(express.json());
 // })
 
 
-mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.h3ft8.mongodb.net/?retryWrites=true&w=majority`)
+mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.h3ft8.mongodb.net/?retryWrites=true&w=majority`, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+})
     .then(() => console.log("connection with moongodb is Successful"))
     .catch((err) => console.log(err))
 
@@ -33,7 +36,7 @@ mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cl
 //     .catch((err) => console.log(err))
 
 // application route 
-app.get("/foods", foods);
+app.use("/foods", foods);
 
 
 
