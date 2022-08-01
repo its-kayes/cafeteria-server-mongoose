@@ -12,7 +12,9 @@ router.get('/', async (req, res) => {
 
 // get by id
 router.get('/', async (req, res) => {
-
+    res.send({
+        status: "Foods GET API working"
+    })
 })
 
 // post data on foods
