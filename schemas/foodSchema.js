@@ -8,8 +8,8 @@ const foodSchema = mongoose.Schema(
     price: Number,
     rating: Number,
     status: Boolean,
-  }
-  // { timestamps: true }
+  },
+  { timestamps: true }
 );
 
 // export default mongoose.models.Food ||
