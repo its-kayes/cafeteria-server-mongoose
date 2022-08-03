@@ -7,6 +7,7 @@ const foodSchema = mongoose.Schema(
     img: String,
     price: Number,
     rating: Number,
+    quantity: Number,
     status: Boolean,
   },
   { timestamps: true }

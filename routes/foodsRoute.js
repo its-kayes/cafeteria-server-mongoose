@@ -7,41 +7,70 @@ const Foods = new mongoose.model("Food", foodSchema);
 
 
 // get by id
-router.get('/:id', async (req, res) => {
-
-})
-
-// get all foods
-router.get("/", async (req, res) => {
+router.get('/id', async (req, res) => {
     try {
-        const data = await Foods.find({ desc: "Test Sea Fish" });
+        const data = await Foods.find({_id: "62c2d2547477d4c3221faa17" });
         res.send({ data, message: 'Successfully loaded products', success: true });
     } catch (error) {
         res.status(500).send({ error: error, message: 'Server side error', success: false });
     }
+})
 
-    // await Foods.find({}, function (err, docs) {
-    //     if (!err) {
-    //         res.status(200).json({
-    //             result: docs
-    //         })
-    //     }
-    // });
-
-
+// get all foods 
+router.get("/", async (req, res) => {
     // (Working)
-    // let data = await Foods.find({})
-    // res.send({data, status: "success"});
-
-
-
-    // res.send({
-    //     status: "Foods GET API working"
-    // })
+    try {
+        const data = await Foods.find({_id: "62c2d2547477d4c3221faa17"});
+        res.send({ data, message: 'Successfully loaded products', success: true });
+    } catch (error) {
+        res.status(500).send({ error: error, message: 'Server side error', success: false });
+    }
 })
 
 
+// Single Data Post (Working)
+router.post("/", async (req, res) => {
+    const newFoods = new Foods(req.body);
+    await newFoods.save((err) => {
+        // await Foods(req.body).save((err) => {
+        if (err) {
+            res.status(500).json({
+                error: "Food part Server Side Error",
+            });
+        } else {
+            res.status(200).json({
+                message: `${req.body.title} insert in to Database!`,
+            });
+        }
+    });
+});
+
+module.exports = router;
+
+
+
+
+
 // router.get("/", async (req, res) => {
+//     await Foods.find({}, function (err, docs) {
+//         if (!err) {
+//             res.status(200).json({
+//                 result: docs
+//             })
+//         }
+//     });
+
+
+//     (Working)
+//     let data = await Foods.find({})
+//     res.send({ data, status: "success" });
+
+
+
+//     res.send({
+//         status: "Foods GET API working"
+//     })
+
 //     await Foods.find({ status: "true" })
 //         .select({
 //             _id: 0,
@@ -82,26 +111,3 @@ router.get("/", async (req, res) => {
 // })
 
 
-
-// Single Data Post (Working)
-router.post("/", async (req, res) => {
-    const newFoods = new Foods(req.body);
-    await newFoods.save((err) => {
-        // await Foods(req.body).save((err) => {
-        if (err) {
-            res.status(500).json({
-                error: "Food part Server Side Error",
-            });
-        } else {
-            res.status(200).json({
-                message: `${req.body.title} insert in to Database!`,
-            });
-        }
-    });
-});
-
-
-
-
-
-module.exports = router;
