@@ -1,4 +1,5 @@
 const express = require('express');
+const { ObjectId } = require('mongodb');
 const mongoose = require('mongoose');
 const router = express.Router();
 const foodSchema = require("../schemas/foodSchema");
@@ -7,20 +8,58 @@ const Foods = new mongoose.model("Food", foodSchema);
 
 
 // get by id
-router.get('/id', async (req, res) => {
+// router.get('/id', async (req, res) => {
+//     const id = "62c2d2957477d4c3221faa1b"
+//     const query = { _id: ObjectId(id) };
+//     // try {
+//     //     // const data = await Foods.findById({ _id: ObjectId(id) });
+//     //     const data = await Foods.findOne(query);
+//     //     console.log(id);
+//     //     console.log(data)
+//     //     res.send({ data, message: 'Successfully loaded products', success: true });
+//     // } catch (error) {
+//     //     res.status(500).send({ error: error, message: 'Server side error', success: false });
+//     // }
+
+//     // var id = '62c2d2957477d4c3221faa1b';
+    
+// });
+
+
+// Sumit FindById 
+// router.get("/:id", async (req, res) => {
+//     await Foods.find({ _id: req.params.id }, (err, data) => {
+//         if (err) {
+//             res.status(500).json({
+//                 error: "There was a server side error!",
+//             });
+//         } else {
+//             res.status(200).json({
+//                 result: data,
+//                 message: "Success",
+//             });
+//         }
+//     });
+// });
+
+// get hy foodId
+router.get("/idx", async (req, res) => {
+    // (Working)
     try {
-        const data = await Foods.find({_id: "62c2d2547477d4c3221faa17" });
+        const data = await Foods.find({foodId: 104});
         res.send({ data, message: 'Successfully loaded products', success: true });
     } catch (error) {
         res.status(500).send({ error: error, message: 'Server side error', success: false });
     }
 })
 
+
+
 // get all foods 
 router.get("/", async (req, res) => {
     // (Working)
     try {
-        const data = await Foods.find({_id: "62c2d2547477d4c3221faa17"});
+        const data = await Foods.find({});
         res.send({ data, message: 'Successfully loaded products', success: true });
     } catch (error) {
         res.status(500).send({ error: error, message: 'Server side error', success: false });
