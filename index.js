@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const foods = require('./routes/foodsRoute');
+const orders = require('./routes/ordersRouter');
 require('dotenv').config();
 const port = process.env.PORT || 5000;
 const app = express();
@@ -35,10 +36,15 @@ mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cl
 //     .then(() => console.log("connection Successful"))
 //     .catch((err) => console.log(err))
 
-// application route 
+
+
+// <------ application route ------->
+
+// Foods route ---->
 app.use("/foods", foods);
 
-
+// Orders route ----->
+app.use("/orders", orders)
 
 
 // default route to check

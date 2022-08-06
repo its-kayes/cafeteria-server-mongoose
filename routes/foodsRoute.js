@@ -6,53 +6,16 @@ const foodSchema = require("../schemas/foodSchema");
 const Foods = new mongoose.model("Food", foodSchema);
 
 
-
-// get by id
-// router.get('/id', async (req, res) => {
-//     const id = "62c2d2957477d4c3221faa1b"
-//     const query = { _id: ObjectId(id) };
-//     // try {
-//     //     // const data = await Foods.findById({ _id: ObjectId(id) });
-//     //     const data = await Foods.findOne(query);
-//     //     console.log(id);
-//     //     console.log(data)
-//     //     res.send({ data, message: 'Successfully loaded products', success: true });
-//     // } catch (error) {
-//     //     res.status(500).send({ error: error, message: 'Server side error', success: false });
-//     // }
-
-//     // var id = '62c2d2957477d4c3221faa1b';
-    
-// });
-
-
-// Sumit FindById 
-// router.get("/:id", async (req, res) => {
-//     await Foods.find({ _id: req.params.id }, (err, data) => {
-//         if (err) {
-//             res.status(500).json({
-//                 error: "There was a server side error!",
-//             });
-//         } else {
-//             res.status(200).json({
-//                 result: data,
-//                 message: "Success",
-//             });
-//         }
-//     });
-// });
-
 // get hy foodId
-router.get("/idx", async (req, res) => {
+router.get("/:id", async (req, res) => {
     // (Working)
     try {
-        const data = await Foods.find({foodId: 104});
+        const data = await Foods.findOne({ foodId: req.params.id });
         res.send({ data, message: 'Successfully loaded products', success: true });
     } catch (error) {
         res.status(500).send({ error: error, message: 'Server side error', success: false });
     }
 })
-
 
 
 // get all foods 
@@ -87,7 +50,40 @@ router.post("/", async (req, res) => {
 module.exports = router;
 
 
+// get by id
+// router.get('/id', async (req, res) => {
+//     const id = "62c2d2957477d4c3221faa1b"
+//     const query = { _id: ObjectId(id) };
+//     // try {
+//     //     // const data = await Foods.findById({ _id: ObjectId(id) });
+//     //     const data = await Foods.findOne(query);
+//     //     console.log(id);
+//     //     console.log(data)
+//     //     res.send({ data, message: 'Successfully loaded products', success: true });
+//     // } catch (error) {
+//     //     res.status(500).send({ error: error, message: 'Server side error', success: false });
+//     // }
 
+//     // var id = '62c2d2957477d4c3221faa1b';
+
+// });
+
+
+// Sumit FindById
+// router.get("/:id", async (req, res) => {
+//     await Foods.find({ _id: req.params.id }, (err, data) => {
+//         if (err) {
+//             res.status(500).json({
+//                 error: "There was a server side error!",
+//             });
+//         } else {
+//             res.status(200).json({
+//                 result: data,
+//                 message: "Success",
+//             });
+//         }
+//     });
+// });      
 
 
 // router.get("/", async (req, res) => {
